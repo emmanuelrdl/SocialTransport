@@ -13,13 +13,23 @@ export default class Home extends Component {
  }
 
  componentWillMount(){
+
    var stationsNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-   this.getStations(number, (stations) => {
-     console.log(stations)
-     return stations
+   var stationsName   = []
+   stationsNumber.forEach((number) => {
+     this.getStations(number, (stations) => {
+       this.pushStationsNames(stations)
+       return stations
+     })
    })
 
+ }
 
+ pushStationsNames(stations){
+   stations.forEach((station) =>{
+     console.log(station.name)
+    //  stationsName.push(station)
+   })
  }
 
  _navigate() {
