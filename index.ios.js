@@ -13,19 +13,22 @@
    Navigator
  } from 'react-native';
 
-import Home from './Home'
+import Travel from './Travel'
+import Lines from './Lines'
 export default class SocialReR extends Component {
 
   renderScene(route, navigator) {
-    if (route.name == 'Home' ){
-      return <Home navigator={navigator} />
+    if (route.name == 'Travel' ){
+      return <Travel navigator={navigator} />
+    } else if (route.name == 'Lines') {
+      return <Lines navigator={navigator} />
     }
   }
 
   render() {
     return (
       <Navigator
-        initialRoute={{ name: 'Home'}}
+        initialRoute={{ name: 'Lines'}}
         renderScene={ this.renderScene }
       />
     );

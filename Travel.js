@@ -4,7 +4,7 @@ import { View, Text, TouchableHighlight,  StyleSheet } from 'react-native';
 import { Container, Header, Title, Button, Icon, Content, InputGroup, Input} from 'native-base';
 import { styles } from './StyleSheet'
 
-export default class Home extends Component {
+export default class Travel extends Component {
 
  constructor(props){
    super(props)
@@ -80,7 +80,7 @@ export default class Home extends Component {
             <Button transparent>
                 <Icon name='ios-menu' />
             </Button>
-              <Title>SocialTransport</Title>
+              <Title>Next Train</Title>
           </Header>
 
         <Content>
@@ -100,10 +100,12 @@ export default class Home extends Component {
   }
 }
 
+// chatbot ?
+// All stations names with lines -> {station: [lines]}
+// Calculate travel:
+  //
 
-
-
-Home.propTypes = {
+Travel.propTypes = {
   // title: PropTypes.string.isRequired,
   // onForward: PropTypes.func.isRequired,
 
