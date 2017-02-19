@@ -76,6 +76,12 @@ export const styles = StyleSheet.create({
    flexDirection: 'row',
    justifyContent: 'space-between',
    padding: 10
+ },
+
+
+ roundedButton: {
+   width:60,
+   height:60
  }
 
 

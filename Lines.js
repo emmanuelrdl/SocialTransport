@@ -8,21 +8,41 @@ export default class Lines extends Component {
 
  constructor(props){
    super(props)
+   this.state = {lineGroups:[ [1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,0,0] ]}
  }
+
 
  _navigate() {
  }
 
 
- componentWillMount(){
-
- }
-
-submitLine(){
-  console.warn('submit')
+submitLine(line){
+  console.warn('submit' + line)
 }
 
   render() {
+
+   const lineBlock = (block) => {
+     return(
+       <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding:20}}>
+        {block.map((line) => {
+          if (line != 0) {
+            return <Button rounded info style={styles.roundedButton} onPress={this.submitLine(line)} > {line} </Button>
+          } else {
+            return <Button rounded info style={styles.roundedButton} >  </Button>
+          }
+         })}
+       </View>
+     )
+   }
+
+    const lineBlocks = this.state.lineGroups.map((key) => {
+      return (
+        lineBlock(key)
+      )
+    })
+
+
     return (
       <Container>
           <Header>
@@ -32,14 +52,8 @@ submitLine(){
               <Title>Selectionez une ligne</Title>
           </Header>
           <Content>
-              <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding:20}}>
-                <Button rounded info style={{width:60, height:60}} onClick={() => this.submitLine()} > 1 </Button>
-                <Button rounded info style={{width:60, height:60}}> 1 </Button>
-                <Button rounded info style={{width:60, height:60}}> 1 </Button>
-                <Button rounded info style={{width:60, height:60}}> 1 </Button>
-              </View>
+            {lineBlocks}
           </Content>
-
       </Container>
     )
   }
