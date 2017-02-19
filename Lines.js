@@ -16,8 +16,8 @@ export default class Lines extends Component {
  }
 
 
-submitLine(line){
-  console.warn('submit' + line)
+toto(line){
+  console.log('coucouc')
 }
 
   render() {
@@ -27,7 +27,7 @@ submitLine(line){
        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding:20}}>
         {block.map((line) => {
           if (line != 0) {
-            return <Button rounded info style={styles.roundedButton} onPress={this.submitLine(line)} > {line} </Button>
+            return <Button rounded info style={styles.roundedButton} onClick={this.toto(line)} > {line} </Button>
           } else {
             return <Button rounded info style={styles.roundedButton} >  </Button>
           }
