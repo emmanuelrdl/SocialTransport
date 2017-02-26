@@ -19,9 +19,9 @@ export default class SocialReR extends Component {
 
   renderScene(route, navigator) {
     if (route.name == 'Travel' ){
-      return <Travel navigator={navigator} />
+      return <Travel navigator={navigator} {...route.passProps} />
     } else if (route.name == 'Lines') {
-      return <Lines navigator={navigator} />
+      return <Lines navigator={navigator} {...route.passProps} />
     }
   }
 

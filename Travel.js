@@ -1,8 +1,9 @@
 
 import React, { Component, PropTypes } from 'react';
-import { View, Text, TouchableHighlight,  StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity,  StyleSheet } from 'react-native';
 import { Container, Header, Title, Button, Icon, Content, InputGroup, Input} from 'native-base';
 import { styles } from './StyleSheet'
+import Autocomplete from 'react-native-autocomplete-input';
 
 export default class Travel extends Component {
 
@@ -11,37 +12,22 @@ export default class Travel extends Component {
    this.state = {stations: []}
  }
 
+ // _navigate() {
+ //   this.props.navigator.push({
+ //     name: 'IndexBooks'
+ //   })
+ // }
+
  componentWillMount(){
-   var stationsNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-   this.returnAllStations(stationsNumber, (stationsName, lineStations) => {
-    this.setState({stations: stationsName})
-   })
-
+  this.getStations(this.props.lineId, (stations) => {
+    stationsName = []
+    stations.map((station) => {
+      stationsName.push(station.name)
+    })
+    this.setState({stationsName: stationsName})
+  })
  }
 
- returnAllStations(stationsNumber, callback){
-   var stationsName   = []
-   var lineStations   = []
-   var stationsNumberCount = 1
-   stationsNumber.forEach((number) => {
-     this.getStations(number, (stations) => {
-       stationsName.push({[number]: this.pushStationsNames(stations)})
-       stationsNumberCount += 1
-       if (stationsNumberCount == stationsNumber.length) {
-         callback(stationsName, lineStations)
-       }
-     })
-   })
-
- }
-
- pushStationsNames(stations){
-   var lineStationsName = []
-   stations.forEach((station) =>{
-     lineStationsName.push(station.name)
-   })
-  return lineStationsName
- }
 
 
  getStations(line, callback) {
@@ -58,20 +44,17 @@ export default class Travel extends Component {
   }
 
 
-   _navigate() {
-     this.props.navigator.push({
-       name: 'IndexBooks'
-     })
-   }
+selectStation(text){
+  var textLength = text.length
+  var updatedStationsName = this.state.stationsName.filter((station) => {
+    return station.substring(0, textLength) == text
+  })
+  console.log(updatedStationsName)
 
-   autoComplete(text){
-     this.findStation(text)
+}
 
-   }
 
-   findStation(text){
-     console.log(this.state.stations)
-   }
+
 
   render() {
     return (
@@ -84,15 +67,18 @@ export default class Travel extends Component {
           </Header>
 
         <Content>
-        <InputGroup borderType='regular' >
-          <Input
-            onChangeText={(text) => this.autoComplete({text})}
-            placeholder='Départ'/>
-        </InputGroup>
-        <InputGroup borderType='regular' >
-          <Input placeholder='Arrivée'/>
-        </InputGroup>
-          <Button block success> Lancer la recherche </Button>
+          <Autocomplete
+            placeholder="Enter your station"
+
+            data={this.state.stationsName}
+            onChangeText={text => this.selectStation(text)}
+            renderItem={data => (
+              <TouchableOpacity onPress={() => this.setState({ stationsName: [] })}>
+                <Text>{data}</Text>
+              </TouchableOpacity>
+            )}
+          />
+
         </Content>
 
       </Container>

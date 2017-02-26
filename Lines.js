@@ -12,22 +12,27 @@ export default class Lines extends Component {
  }
 
 
- _navigate() {
+ _navigate(page, line) {
+   this.props.navigator.push({
+      name: page,
+      passProps: {
+        lineId: line
+      }
+    })
  }
 
 
-toto(line){
-  console.log('coucouc')
+submitLine(line){
+  this._navigate('Travel', line)
 }
 
   render() {
-
    const lineBlock = (block) => {
      return(
        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding:20}}>
         {block.map((line) => {
           if (line != 0) {
-            return <Button rounded info style={styles.roundedButton} onClick={this.toto(line)} > {line} </Button>
+            return <Button rounded info style={styles.roundedButton}  onPress={() => this.submitLine(line)}  > {line} </Button>
           } else {
             return <Button rounded info style={styles.roundedButton} >  </Button>
           }
